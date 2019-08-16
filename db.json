@@ -1,0 +1,34 @@
+{
+  "blog": [
+    {
+      "id": 1,
+      "title": "第一篇博客",
+      "author": "小林",
+      "content": "div、section、article，语义是从无到有，逐渐增强的。div无任何语义，仅仅用作样式化或者脚本化的标签。\n\n对于一段主题性的内容，则就适用section，而假如这段内容可以脱离上下文，作为完整的独立存在的一段内容，则就适用 article。\n\n原则上来说，能使用article的时候，也是可以使用section的，但是实际上，假如使用article更合适，那么就不要使用section。"
+    },
+    {
+      "id": 2,
+      "title": "第二篇博客",
+      "author": "小游",
+      "content": "块中文字水平居中:text-align 用于块级元素,作用在使用它的块元素中的文字或者图片上。使得它们在水平方向上居中。 这个属性只能作用于块元素"
+    },
+    {
+      "id": 3,
+      "title": "json-server",
+      "author": "typicode",
+      "content": "testtesttesttesttesttesttesttesttesttesttest"
+    },
+    {
+      "id": 4,
+      "title": "json-server",
+      "author": "typicode",
+      "content": "testtesttestttest"
+    },
+    {
+      "id": 5,
+      "title": "json-server",
+      "author": "xy",
+      "content": "this is a new content"
+    }
+  ]
+}
