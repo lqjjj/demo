@@ -10,6 +10,9 @@
                       placeholder="请输入内容"
             >
             </el-input>
+            <div class="block">选择字体颜色:
+                <el-color-picker v-model="blog.color"></el-color-picker>
+            </div>
             <el-button @click.prevent="post"
                        type="primary"
             >提交</el-button>
@@ -22,7 +25,10 @@
         name: "AddBlog",
         data(){
             return{
-                blog:{author:"小游"}
+                blog:{
+                    author:"小游",
+                    color: "#355BE4"
+                }
             }
         },
         methods:{
@@ -32,8 +38,16 @@
                     "title": this.blog.title,
                     "author": this.blog.author,
                     "content": this.blog.content,
-                    "time": now.valueOf()
+                    "time": now.valueOf(),
+                    "color":this.blog.color
                 })
+                    .then(()=>{
+                        this.$message({
+                            message: '添加成功！',
+                            type: 'success'
+                        });
+                        this.$router.push({path:"/"})
+                    })
             }
         }
 
@@ -54,5 +68,8 @@
     }
     button{
         margin-top: 20px;
+    }
+    .block{
+        margin: 20px 0;
     }
 </style>

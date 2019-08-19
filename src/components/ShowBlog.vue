@@ -2,8 +2,8 @@
     <div id="show-blog">
         <div class="blog-content">
     <div class="blog" v-for="blog in blogs" v-bind:key="blog.id">
-        <h2>{{blog.title}}</h2>
-        <article>{{blog.content}}</article>
+        <h2 v-bind:style="{color: rainbowColor()}">{{blog.title}}</h2>
+        <article v-bind:style="{color:blog.color}">{{blog.content}}</article>
         <p>{{new Date(blog.time).toLocaleString()}} by {{blog.author}}</p>
     </div>
         </div>
@@ -21,6 +21,11 @@
         created() {
             this.axios.get(`http://localhost:3000/blog`)
                 .then(data=>this.blogs=data.data)
+        },
+        methods:{
+            rainbowColor:function () {
+                return "#"+Math.random().toString(16).slice(2,8);
+            }
         }
     }
 </script>

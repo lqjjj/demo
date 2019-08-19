@@ -57,9 +57,9 @@
                         this.$message({
                             message: '删除成功',
                             type: 'success'
-                        })
-                            .then(this.axios.get(`http://localhost:3000/blog`)
-                                .then(data=>this.blogs=data.data))
+                        });
+                           this.axios.get(`http://localhost:3000/blog`)
+                                .then(data=>this.blogs=data.data)
                     })
             }
         },
