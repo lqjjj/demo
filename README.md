@@ -1,5 +1,5 @@
 # demo
-a blog demo version0.1
+a blog demo
 ## Project setup
 ```
 yarn install
