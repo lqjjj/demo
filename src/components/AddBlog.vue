@@ -3,10 +3,16 @@
         <h2>添加博客</h2>
         <form>
             <label>标题:</label>
-            <input type="text" v-model="blog.title">
+            <el-input type="text" v-model="blog.title" placeholder="请输入标题"></el-input>
             <label>内容:</label>
-            <textarea v-model="blog.content"></textarea>
-            <button @click.prevent="post" >提交</button>
+            <el-input type="textarea"  v-model="blog.content"
+                      :autosize="{ minRows: 5, maxRows: 10}"
+                      placeholder="请输入内容"
+            >
+            </el-input>
+            <el-button @click.prevent="post"
+                       type="primary"
+            >提交</el-button>
         </form>
     </div>
 </template>
@@ -21,11 +27,12 @@
         },
         methods:{
             post:function () {
-                console.log('123');
+                const now =new Date();
                 this.axios.post("http://localhost:3000/blog",{
                     "title": this.blog.title,
                     "author": this.blog.author,
-                    "content": this.blog.content
+                    "content": this.blog.content,
+                    "time": now.valueOf()
                 })
             }
         }
@@ -43,5 +50,9 @@
     }
     label{
         display: block;
+        margin: 20px 0;
+    }
+    button{
+        margin-top: 20px;
     }
 </style>

@@ -1,28 +1,31 @@
 <template>
     <header>
-        <div id="sb"><router-link to="/">展示博客</router-link></div>
-        <div id="ab"><router-link to="/add">添加博客</router-link></div>
+        <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" router="true">
+        <el-menu-item index="/">展示博客</el-menu-item>
+        <el-menu-item index="/add">添加博客</el-menu-item>
+        <el-menu-item index="/edit">管理博客</el-menu-item>
+        </el-menu>
     </header>
 </template>
 
 <script>
     export default {
-        name: "NavBar"
+        name: "NavBar",
+        data(){
+            return{
+                activeIndex:'/'
+            }
+        },
+        mounted() {
+            this.activeIndex = window.location.pathname;
+        }
     }
 </script>
 
 <style scoped>
 header{
-    display: flex;
-    height: 80px;
-    background: aquamarine;
-    justify-content:center;
 }
-    div{
-        height: 40px;
-        margin: auto 12px;
-        width: 80px;
-        font-size: 20px;
-        line-height: 40px;
-    }
+a{
+    text-decoration: none;
+}
 </style>
