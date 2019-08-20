@@ -43,4 +43,6 @@
     h2{
         text-align: center;
     }
+    article{
+    }
 </style>
