@@ -1,75 +1,77 @@
 <template>
     <div id="edit-blog">
-        <el-table
-                :data="blogs"
-                stripe
-                style="width: 100%">
-            <el-table-column
-                    prop="time"
-                    label="日期"
-                    width="180"
-                    :formatter="dateFormat"
+        <h2>修改博客</h2>
+        <form>
+            <label>标题:</label>
+            <el-input type="text" v-model="blog.title" placeholder="请输入标题"></el-input>
+            <label>内容:</label>
+            <el-input type="textarea"  v-model="blog.content"
+                      :autosize="{ minRows: 5, maxRows: 10}"
+                      placeholder="请输入内容"
             >
-            </el-table-column>
-            <el-table-column
-                    prop="author"
-                    label="作者"
-                    width="180">
-            </el-table-column>
-            <el-table-column
-                    prop="title"
-                    label="标题">
-            </el-table-column>
-            <el-table-column label="操作">
-                <template slot-scope="scope">
-                    <el-button
-                            size="mini"
-                            type="danger"
-                            @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-                </template>
-            </el-table-column>
-        </el-table>
+            </el-input>
+            <div class="block">选择字体颜色:
+                <el-color-picker v-model="blog.color"></el-color-picker>
+            </div>
+            <el-button @click.prevent="post"
+                       type="primary"
+            >提交</el-button>
+        </form>
     </div>
 </template>
 
 <script>
     export default {
-        name: "EditBlog.vue",
+        name: "EditBlog",
         data(){
-            return {
-                blogs:[]
+            return{
+                blog:{
+                    id:this.$route.query.id
+                }
             }
         },
         methods:{
-            dateFormat:function (row, column) {
-                const newDate=row[column.property];
-                return new Date(newDate).toLocaleString()
-            },
-            handleDelete:function (index,row) {
-                this.$confirm('此操作将永久删除该条博客, 是否继续?', '提示', {
-                    confirmButtonText: '确定',
-                    cancelButtonText: '取消',
-                    type: 'warning'
-                }).then(()=>{
-                   this.axios.delete(`http://localhost:3000/blog/${row.id}`)
+            post:function () {
+                const now =new Date();
+                this.axios.patch(`http://localhost:3000/blog/${this.blog.id}`,{
+                    "title": this.blog.title,
+                    "author": this.blog.author,
+                    "content": this.blog.content,
+                    "color":this.blog.color,
+                    "editedTime":now.valueOf()
                 })
                     .then(()=>{
                         this.$message({
-                            message: '删除成功',
+                            message: '编辑成功！',
                             type: 'success'
                         });
-                           this.axios.get(`http://localhost:3000/blog`)
-                                .then(data=>this.blogs=data.data)
+                        this.$router.push({path:"/"})
                     })
             }
         },
         created() {
-            this.axios.get(`http://localhost:3000/blog`)
-                .then(data=>this.blogs=data.data)
+            this.axios.get(`http://localhost:3000/blog/${this.blog.id}`)
+                .then(data=>this.blog=data.data)
         }
     }
 </script>
 
 <style scoped>
-
+    #edit-blog{
+        width: 720px;
+        margin: 0 auto;
+    }
+    h2{
+        text-align: center;
+    }
+    label{
+        display: block;
+        margin: 20px 0;
+    }
+    button{
+        margin-top: 20px;
+    }
+    .block{
+        margin: 20px 0;
+    }
 </style>
