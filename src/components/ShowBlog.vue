@@ -4,7 +4,7 @@
     <div class="blog" v-for="blog in blogs" v-bind:key="blog.id">
         <h2 v-bind:style="{color: rainbowColor()}">{{blog.title}}</h2>
         <article v-bind:style="{color:blog.color}">{{blog.content}}</article>
-        <p>{{new Date(blog.time).toLocaleString()}} by {{blog.author}}</p>
+        <p>{{new Date(blog.time).toLocaleDateString()}} by {{blog.author}}</p>
     </div>
         </div>
     </div>
