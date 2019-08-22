@@ -19,7 +19,7 @@
             }
         },
         created() {
-            this.axios.get(`http://localhost:3000/blog`)
+            this.axios.get(`http://localhost:3000/blog?_sort=time&_order=desc`)
                 .then(data=>this.blogs=data.data)
         },
         methods:{
