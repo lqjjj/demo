@@ -8,6 +8,7 @@
             <el-input type="textarea"  v-model="blog.content"
                       :autosize="{ minRows: 5, maxRows: 10}"
                       placeholder="请输入内容"
+                      clearable="true"
             >
             </el-input>
             <div class="block">选择字体颜色:
