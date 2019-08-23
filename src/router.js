@@ -5,7 +5,10 @@ import AddBlog from "./components/AddBlog";
 import ManageBlog from "./components/ManageBlog";
 import EditBlog from "./components/EditBlog";
 Vue.use(Router);
-
+const originalPush = Router.prototype.push;
+Router.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+};
 export default new Router({
   routes: [
     {

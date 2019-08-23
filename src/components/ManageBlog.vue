@@ -53,12 +53,14 @@
             dateFormat:function (row, column) {
                 if(row[column.property]){
                 const newDate=row[column.property];
-                return new Date(newDate).toLocaleString();}
+                return new Date(newDate).toLocaleString()}
                     else return '无'
                 },
 
             handleDelete:function (index,row) {
-                this.$confirm('此操作将永久删除该条博客, 是否继续?', '提示', {
+                this.$confirm(`你确认要删除在 ${new Date(row.time).toLocaleDateString()} 日发布,标题为：${row.title}的博客吗?`,
+                    '提示',
+                    {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
                     type: 'warning'

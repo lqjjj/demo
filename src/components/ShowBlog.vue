@@ -31,14 +31,19 @@
 </script>
 
 <style scoped>
+    *{
+        margin: 0;
+    }
     #show-blog{
     }
     .blog-content{
         width: 720px;
-        margin: 0 auto;
+        margin: 30px auto;
     }
     .blog{
-        background: white;
+        background: #F2F6FC;
+        border-radius: 10px;
+        margin-bottom: 20px;
     }
     h2{
         text-align: center;

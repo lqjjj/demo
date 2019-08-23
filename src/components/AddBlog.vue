@@ -38,7 +38,7 @@
                     "title": this.blog.title,
                     "author": this.blog.author,
                     "content": this.blog.content,
-                    "time": now.valueOf(),
+                    "time": now,
                     "color":this.blog.color
                 })
                     .then(()=>{

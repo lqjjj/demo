@@ -1,6 +1,8 @@
 <template>
     <div id="edit-blog">
-        <h2>修改博客</h2>
+        <el-page-header @back="goBack" content="修改博客">
+        </el-page-header>
+        <div class="content">
         <form>
             <label>标题:</label>
             <el-input type="text" v-model="blog.title" placeholder="请输入标题"></el-input>
@@ -17,6 +19,7 @@
                        type="primary"
             >提交</el-button>
         </form>
+    </div>
     </div>
 </template>
 
@@ -38,7 +41,7 @@
                     "author": this.blog.author,
                     "content": this.blog.content,
                     "color":this.blog.color,
-                    "editedTime":now.valueOf()
+                    "editedTime":now
                 })
                     .then(()=>{
                         this.$message({
@@ -47,6 +50,9 @@
                         });
                         this.$router.push({path:"/"})
                     })
+            },
+            goBack:function () {
+                this.$router.push('/manage')
             }
         },
         created() {
@@ -57,9 +63,13 @@
 </script>
 
 <style scoped>
-    #edit-blog{
+    .content{
         width: 720px;
         margin: 0 auto;
+    }
+    #edit-blog{
+        padding-left: 20px;
+        padding-top: 20px;
     }
     h2{
         text-align: center;
