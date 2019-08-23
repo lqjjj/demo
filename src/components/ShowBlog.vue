@@ -5,7 +5,7 @@
     <div class="blog" v-for="blog in filterBlogs" v-bind:key="blog.id">
         <h2 v-bind:style="{color: rainbowColor()}">{{blog.title}}</h2>
         <article v-bind:style="{color:blog.color}" >{{blog.content|addIndent}}</article>
-        <p>{{new Date(blog.time).toLocaleDateString()}} by {{blog.author}}</p>
+        <p id="showTime">{{new Date(blog.time).toLocaleDateString()}} by {{blog.author}}</p>
     </div>
         </div>
     </div>
@@ -70,5 +70,11 @@
     }
     article{
         white-space: pre-wrap;
+    }
+    #showTime{
+        font-size: 12px;
+        text-align: right;
+        padding-bottom: 5px;
+        color: #ff8add
     }
 </style>
