@@ -1,7 +1,7 @@
 <template>
     <div id="show-blog">
         <div class="blog-content">
-            <el-input v-model="searching" placeholder="输入标题或者日期检索" clearable="true" style="width:200px;"></el-input>
+            <el-input v-model="searching" placeholder="输入标题或者日期检索" clearable style="width:200px;"></el-input>
     <div class="blog" v-for="blog in filterBlogs" v-bind:key="blog.id">
         <h2 v-bind:style="{color: rainbowColor()}">{{blog.title}}</h2>
         <article v-bind:style="{color:blog.color}" >{{blog.content|addIndent}}</article>

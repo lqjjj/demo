@@ -8,11 +8,17 @@
             <el-input type="textarea"  v-model="blog.content"
                       :autosize="{ minRows: 5, maxRows: 10}"
                       placeholder="请输入内容"
-                      clearable="true"
             >
             </el-input>
-            <div class="block">选择字体颜色:
-                <el-color-picker v-model="blog.color"></el-color-picker>
+            <div class="block">
+                <p>选择字体颜色:</p>
+                <el-color-picker v-model="blog.color" style="margin-top: 10px;margin-left: 10px"></el-color-picker>
+                <el-checkbox-group v-model="checkboxGroup1" size="small" style="display: flex;margin-left: 50px">
+                    <el-checkbox label="日常" border></el-checkbox>
+                    <el-checkbox label="生日" border></el-checkbox>
+                    <el-checkbox label="节日" border></el-checkbox>
+                    <el-checkbox label="特殊日子" border></el-checkbox>
+                </el-checkbox-group>
             </div>
             <el-button @click.prevent="post"
                        type="primary"
@@ -29,7 +35,8 @@
                 blog:{
                     author:"小游",
                     color: "#355BE4"
-                }
+                },
+                checkboxGroup1: [],
             }
         },
         methods:{
@@ -72,5 +79,6 @@
     }
     .block{
         margin: 20px 0;
+        display: flex;
     }
 </style>
