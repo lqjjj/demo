@@ -1,7 +1,9 @@
 <template>
     <div id="show-blog">
         <div class="blog-content">
-            <el-input v-model="searching" placeholder="输入标题或者日期检索" clearable style="width:200px;"></el-input>
+            <el-tooltip class="item" effect="light" content="日期用' / '进行分隔" placement="left">
+            <el-input v-model="searching" placeholder="输入标题或者日期关键字检索" clearable style="width:230px;"></el-input>
+                </el-tooltip>
     <div class="blog" v-for="blog in filterBlogs" v-bind:key="blog.id">
         <h2 v-bind:style="{color: rainbowColor()}">{{blog.title}}</h2>
         <article v-bind:style="{color:blog.color}" >{{blog.content|addIndent}}</article>
@@ -37,7 +39,6 @@
                     return blog.title.match(this.searching)||date.match(this.searching)
                 })
             },
-
         },
         filters:{
             addIndent:function (value) {

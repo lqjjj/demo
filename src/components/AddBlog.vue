@@ -34,7 +34,9 @@
             return{
                 blog:{
                     author:"小游",
-                    color: "#355BE4"
+                    color: "#355BE4",
+                    title:"",
+                    content:""
                 },
                 checkboxGroup1: [],
             }
