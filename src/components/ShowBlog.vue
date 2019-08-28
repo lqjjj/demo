@@ -7,9 +7,12 @@
     <div class="blog" v-for="blog in filterBlogs" v-bind:key="blog.id">
         <h2 v-bind:style="{color: rainbowColor()}">{{blog.title}}</h2>
         <article v-bind:style="{color:blog.color}" >{{blog.content|addIndent|sliceContent(blog)}}<el-link type="primary"
-                                                                                                    v-if="blog.content.length>150"
+                                                                                                    v-if="blog.content.length>150&&!blog.isExpanded"
                                                                                                     @click="dealExpand(blog.id)"
-        > ...点我展开</el-link></article>
+        > ...点我展开</el-link><el-link type="primary"
+                                    v-if="blog.content.length>150&&blog.isExpanded"
+                                    @click="dealCollapse(blog.id)"
+        > 收起</el-link></article>
         <p id="showTime">{{new Date(blog.time).toLocaleDateString()}} by {{blog.author}}</p>
     </div>
             <div class="block">
@@ -55,6 +58,10 @@
                 }),
                     'isExpanded',true
                 );
+            },
+            dealCollapse:function (id) {
+                this.blogs.find((blog)=>{
+                    return blog.id==id}).isExpanded=false
             }
         },
         computed:{
