@@ -6,9 +6,23 @@
                 </el-tooltip>
     <div class="blog" v-for="blog in filterBlogs" v-bind:key="blog.id">
         <h2 v-bind:style="{color: rainbowColor()}">{{blog.title}}</h2>
-        <article v-bind:style="{color:blog.color}" >{{blog.content|addIndent}}</article>
+        <article v-bind:style="{color:blog.color}" >{{blog.content|addIndent|sliceContent(blog)}}<el-link type="primary"
+                                                                                                    v-if="blog.content.length>150"
+                                                                                                    @click="dealExpand(blog.id)"
+        > ...点我展开</el-link></article>
         <p id="showTime">{{new Date(blog.time).toLocaleDateString()}} by {{blog.author}}</p>
     </div>
+            <div class="block">
+                <el-pagination
+                        layout="prev, pager, next"
+                        :total="blogs.length"
+                        :page-size=5
+                        :current-page="cuPage"
+                        @current-change="dealChange"
+                        v-show="!searching"
+                >
+                </el-pagination>
+            </div>
         </div>
     </div>
 </template>
@@ -19,7 +33,8 @@
         data(){
             return{
                 blogs:[],
-                searching:''
+                searching:'',
+                cuPage:1,
             }
         },
         created() {
@@ -30,20 +45,41 @@
         methods:{
             rainbowColor:function () {
                 return "#"+Math.random().toString(16).slice(2,8);
+            },
+            dealChange:function (page) {
+                this.cuPage=page;
+            },
+            dealExpand:function (id) {
+                this.$set(this.blogs.find((blog)=>{
+                    return blog.id==id
+                }),
+                    'isExpanded',true
+                );
             }
         },
         computed:{
             filterBlogs:function () {
-                return this.blogs.filter((blog)=>{
-                    let date=new Date(blog.time).toLocaleDateString();
-                    return blog.title.match(this.searching)||date.match(this.searching)
-                })
+                //如果搜索框不为空则过滤搜索框内容
+                if(this.searching){
+                    return this.blogs.filter((blog)=>{
+                        let date=new Date(blog.time).toLocaleDateString();
+                        return blog.title.match(this.searching)||date.match(this.searching)
+                    })
+                }
+                //否则过滤分页
+                else
+                return this.blogs.slice(5*(this.cuPage-1),5*this.cuPage)
             },
         },
         filters:{
             addIndent:function (value) {
                 let t='\t';
                 return t.concat(value.replace(/\n/g,'\n\t'))
+            },
+            sliceContent:function (value,blog) {
+                if (blog.isExpanded)
+                    return value;
+                return value.slice(0,150)
             }
         }
     }
