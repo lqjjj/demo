@@ -65,14 +65,14 @@
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(()=>{
-                   this.axios.delete(`http://localhost:3000/blog/${row.id}`)
+                   this.axios.delete(`http://10.112.27.125:3000/blog/${row.id}`)
                 })
                     .then(()=>{
                         this.$message({
                             message: '删除成功',
                             type: 'success'
                         });
-                           this.axios.get(`http://localhost:3000/blog`)
+                           this.axios.get(`http://10.112.27.125:3000/blog`)
                                 .then(data=>this.blogs=data.data)
                     })
             },
@@ -81,7 +81,7 @@
             }
         },
         created() {
-            this.axios.get(`http://localhost:3000/blog`)
+            this.axios.get(`http://10.112.27.125:3000/blog`)
                 .then(data=>this.blogs=data.data)
         }
     }

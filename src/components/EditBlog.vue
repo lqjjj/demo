@@ -36,7 +36,7 @@
         methods:{
             post:function () {
                 const now =new Date();
-                this.axios.patch(`http://localhost:3000/blog/${this.blog.id}`,{
+                this.axios.patch(`http://10.112.27.125:3000/blog/${this.blog.id}`,{
                     "title": this.blog.title,
                     "author": this.blog.author,
                     "content": this.blog.content,
@@ -56,7 +56,7 @@
             }
         },
         created() {
-            this.axios.get(`http://localhost:3000/blog/${this.blog.id}`)
+            this.axios.get(`http://10.112.27.125:3000/blog/${this.blog.id}`)
                 .then(data=>this.blog=data.data)
         }
     }

@@ -23,7 +23,7 @@
             }
         },
         created() {
-            this.axios.get(`http://localhost:3000/blog?_sort=time&_order=desc`)
+            this.axios.get(`http://10.112.27.125:3000/blog?_sort=time&_order=desc`)
                 .then(data=>{this.blogs=data.data
                 })
         },
