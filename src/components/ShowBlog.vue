@@ -4,16 +4,16 @@
             <el-tooltip class="item" effect="light" content="日期用' / '进行分隔" placement="left">
             <el-input v-model="searching" placeholder="输入标题或者日期关键字检索" clearable style="width:230px;"></el-input>
                 </el-tooltip>
-    <div class="blog" v-for="blog in filterBlogs" v-bind:key="blog.id">
+    <div class="blog" v-for="blog in filterBlogs" v-bind:key="blog._id">
         <h2 v-bind:style="{color: rainbowColor()}">{{blog.title}}</h2>
         <article v-bind:style="{color:blog.color}" >{{blog.content|addIndent|sliceContent(blog)}}<el-link type="primary"
                                                                                                     v-if="blog.content.length>150&&!blog.isExpanded"
-                                                                                                    @click="dealExpand(blog.id)"
+                                                                                                    @click="dealExpand(blog._id)"
         > ...点我展开</el-link><el-link type="primary"
                                     v-if="blog.content.length>150&&blog.isExpanded"
-                                    @click="dealCollapse(blog.id)"
+                                    @click="dealCollapse(blog._id)"
         > 收起</el-link></article>
-        <p id="showTime">{{new Date(blog.time).toLocaleDateString()}} by {{blog.author}}</p>
+        <p id="showTime">{{new Date(blog.date).toLocaleDateString()}} by {{blog.author}}</p>
     </div>
             <div class="block">
                 <el-pagination
@@ -41,7 +41,7 @@
             }
         },
         created() {
-            this.axios.get(`http://10.112.27.125:3000/blog?_sort=time&_order=desc`)
+            this.axios.get(`/api/blog`)
                 .then(data=>{this.blogs=data.data
                 })
         },
@@ -54,14 +54,14 @@
             },
             dealExpand:function (id) {
                 this.$set(this.blogs.find((blog)=>{
-                    return blog.id==id
+                    return blog._id===id
                 }),
                     'isExpanded',true
                 );
             },
             dealCollapse:function (id) {
                 this.blogs.find((blog)=>{
-                    return blog.id==id}).isExpanded=false
+                    return blog._id===id}).isExpanded=false
             }
         },
         computed:{
@@ -69,7 +69,7 @@
                 //如果搜索框不为空则过滤搜索框内容
                 if(this.searching){
                     return this.blogs.filter((blog)=>{
-                        let date=new Date(blog.time).toLocaleDateString();
+                        let date=new Date(blog.date).toLocaleDateString();
                         return blog.title.match(this.searching)||date.match(this.searching)
                     })
                 }

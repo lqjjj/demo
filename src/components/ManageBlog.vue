@@ -5,7 +5,7 @@
                 stripe
                 style="width: 100%">
             <el-table-column
-                    prop="time"
+                    prop="date"
                     label="日期"
                     width="180"
                     :formatter="dateFormat"
@@ -21,7 +21,7 @@
                     label="标题">
             </el-table-column>
             <el-table-column
-                    prop="editedTime"
+                    prop="edited_time"
                     label="最近一次编辑时间"
                     :formatter="dateFormat"
             >
@@ -58,7 +58,7 @@
                 },
 
             handleDelete:function (index,row) {
-                this.$confirm(`你确认要删除在 ${new Date(row.time).toLocaleDateString()} 日发布,标题为：${row.title}的博客吗?`,
+                this.$confirm(`你确认要删除在 ${new Date(row.date).toLocaleDateString()} 日发布,标题为：${row.title}的博客吗?`,
                     '提示',
                     {
                     confirmButtonText: '确定',
@@ -81,7 +81,7 @@
             }
         },
         created() {
-            this.axios.get(`http://10.112.27.125:3000/blog`)
+            this.axios.get(`/api/blog`)
                 .then(data=>this.blogs=data.data)
         }
     }
