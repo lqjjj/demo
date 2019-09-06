@@ -43,12 +43,10 @@
         },
         methods:{
             post:function () {
-                const now =new Date();
-                this.axios.post("http://10.112.27.125:3000/blog",{
+                this.axios.post("api/addblog",{
                     "title": this.blog.title,
                     "author": this.blog.author,
                     "content": this.blog.content,
-                    "time": now,
                     "color":this.blog.color
                 })
                     .then(()=>{
