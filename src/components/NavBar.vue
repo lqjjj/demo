@@ -4,6 +4,7 @@
         <el-menu-item index="/">展示博客</el-menu-item>
         <el-menu-item index="/add">添加博客</el-menu-item>
         <el-menu-item index="/manage">管理博客</el-menu-item>
+        <el-menu-item index="/img">上传图片</el-menu-item>
         </el-menu>
     </header>
 </template>

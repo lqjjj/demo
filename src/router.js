@@ -4,6 +4,7 @@ import ShowBlog from "./components/ShowBlog";
 import AddBlog from "./components/AddBlog";
 import ManageBlog from "./components/ManageBlog";
 import EditBlog from "./components/EditBlog";
+import addImg from "./components/addImg";
 Vue.use(Router);
 const originalPush = Router.prototype.push;
 Router.prototype.push = function push(location) {
@@ -27,6 +28,10 @@ export default new Router({
       path:'/edit',
       component:EditBlog
     },
+    {
+      path:'/img',
+      component:addImg
+    }
   ],
   mode:"history"
 })

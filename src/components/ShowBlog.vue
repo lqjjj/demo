@@ -13,6 +13,12 @@
                                     v-if="blog.content.length>150&&blog.isExpanded"
                                     @click="dealCollapse(blog._id)"
         > 收起</el-link></article>
+        <div class="block" v-for="url in blog.img_list" :key="url">
+            <el-image
+                    style="width: 100px; height: 100px"
+                    :src="url"
+                    :fit="fit"></el-image>
+        </div>
         <p id="showTime">{{new Date(blog.date).toLocaleDateString()}} by {{blog.author}}</p>
     </div>
             <div class="block">
